@@ -1,96 +1,74 @@
-# Import required libraries
-import pandas as pd
+"""Exploratory analysis of the Netflix titles dataset.
+
+Run:  python netflix_data_analysis.py
+Writes charts to figures/ and prints the numbers used in the README.
+"""
+from pathlib import Path
+
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import pandas as pd
 
-# Use default style for cleaner visuals
-plt.style.use('default')
+HERE = Path(__file__).parent
+FIG = HERE / "figures"
+FIG.mkdir(exist_ok=True)
 
-# Load dataset
-df = pd.read_csv("E:/netflix/netflix_titles.csv")
+raw = pd.read_csv(HERE / "netflix_titles.csv")
+print(f"Titles: {len(raw):,}  |  duplicate show_ids: {raw['show_id'].duplicated().sum()}")
+print("Missing values per column:\n", raw.isna().sum()[raw.isna().sum() > 0].to_string())
 
-# Preview first rows
-print(df.head())
+# ---- Movies vs TV shows (all titles) -------------------------------------
+types = raw["type"].value_counts()
+print("\nTitles by type:\n", types.to_string())
+print(f"Movie share: {types['Movie'] / types.sum():.1%}")
 
-print("\n" + "-"*50 + "\n")
+fig, ax = plt.subplots(figsize=(8, 5))
+bars = ax.bar(types.index, types.values, color=["#E50914", "#564d4d"])
+ax.bar_label(bars, fmt="{:,.0f}")
+ax.set_title("Movies vs TV shows", fontsize=14, weight="bold")
+ax.set_ylabel("Titles")
+fig.tight_layout()
+fig.savefig(FIG / "movies_vs_tv_shows.png", dpi=150)
+plt.close(fig)
 
-# -------------------------------
-# Data Cleaning
-# -------------------------------
+# ---- Top countries ---------------------------------------------------------
+# A title can list several countries; each country counts once per title.
+# Titles with no country listed are left out of this part.
+with_country = raw.dropna(subset=["country"]).copy()
+print(f"\nTitles with a country listed: {len(with_country):,} ({len(raw) - len(with_country):,} without)")
+countries = (
+    with_country.assign(country=with_country["country"].str.split(","))
+    .explode("country")
+    .assign(country=lambda d: d["country"].str.strip())
+)
+countries = countries[countries["country"] != ""]
+top = countries["country"].value_counts().head(10)
+print("\nTop 10 countries (titles):\n", top.to_string())
 
-# Remove rows with missing country values
-df = df.dropna(subset=['country'])
+fig, ax = plt.subplots(figsize=(10, 6))
+bars = ax.barh(top.index[::-1], top.values[::-1], color="#E50914")
+ax.bar_label(bars, fmt="{:,.0f}", padding=3)
+ax.set_title("Top 10 countries by number of titles", fontsize=14, weight="bold")
+ax.set_xlabel("Titles")
+fig.tight_layout()
+fig.savefig(FIG / "top_countries.png", dpi=150)
+plt.close(fig)
 
-# Split multiple countries into lists
-df['country'] = df['country'].str.split(',')
+# ---- Titles by release year ------------------------------------------------
+per_year = raw["release_year"].value_counts().sort_index()
+peak_year = per_year.idxmax()
+print(f"\nRelease years: {per_year.index.min()} to {per_year.index.max()}")
+print(f"Peak release year: {peak_year} ({per_year.max():,} titles)")
+print(f"Titles released 2015 or later: {(raw['release_year'] >= 2015).mean():.1%}")
 
-# Expand lists into separate rows
-df = df.explode('country')
-
-# Remove extra spaces
-df['country'] = df['country'].str.strip()
-
-# -------------------------------
-# Movies vs TV Shows
-# -------------------------------
-
-type_counts = df['type'].value_counts()
-print(type_counts)
-
-plt.figure(figsize=(8,5))
-
-type_counts.plot(kind='bar')
-
-plt.title("Movies vs TV Shows", fontsize=14)
-plt.xlabel("Type", fontsize=12)
-plt.ylabel("Count", fontsize=12)
-
-plt.xticks(rotation=0)
-plt.tight_layout()
-
-plt.show()
-
-print("\n" + "-"*50 + "\n")
-
-# -------------------------------
-# Top 10 Countries
-# -------------------------------
-
-top_countries = df['country'].value_counts().head(10)
-print(top_countries)
-
-plt.figure(figsize=(10,6))
-
-top_countries.plot(kind='bar')
-
-plt.title("Top 10 Countries Producing Netflix Content", fontsize=14)
-plt.xlabel("Country", fontsize=12)
-plt.ylabel("Count", fontsize=12)
-
-plt.xticks(rotation=45)
-plt.tight_layout()
-
-plt.show()
-
-print("\n" + "-"*50 + "\n")
-
-# -------------------------------
-# Content Over Years
-# -------------------------------
-
-# Convert release_year to numeric if needed
-df['release_year'] = pd.to_numeric(df['release_year'], errors='coerce')
-
-# Count content per year
-content_per_year = df['release_year'].value_counts().sort_index()
-
-plt.figure(figsize=(10,6))
-
-content_per_year.plot(kind='line')
-
-plt.title("Growth of Netflix Content Over Time", fontsize=14)
-plt.xlabel("Year", fontsize=12)
-plt.ylabel("Count", fontsize=12)
-
-plt.tight_layout()
-
-plt.show()
+fig, ax = plt.subplots(figsize=(10, 6))
+per_year[per_year.index >= 1990].plot(ax=ax, color="#E50914", linewidth=2)
+ax.set_title("Titles by release year (1990 onward)", fontsize=14, weight="bold")
+ax.set_xlabel("Release year")
+ax.set_ylabel("Titles")
+ax.grid(alpha=0.3)
+fig.tight_layout()
+fig.savefig(FIG / "titles_by_release_year.png", dpi=150)
+plt.close(fig)
+print("\nCharts saved to figures/")
