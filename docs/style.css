@@ -1,17 +1,17 @@
-:root{--bg:#06080f;--card:#0d1220;--line:rgba(255,255,255,.08);--txt:#e8ecf5;--mut:#8f99b3;--a:#34d399;--b:#38bdf8;--c:#a78bfa}
+:root{--bg:#0b0608;--card:#15090d;--line:rgba(255,255,255,.09);--txt:#f4eaec;--mut:#a8959a;--a:#ff3b4a;--b:#ff7a6b;--c:#ffb4a8}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
 .aurora{position:fixed;z-index:0;width:60vw;height:60vw;border-radius:50%;filter:blur(120px);opacity:.16;pointer-events:none}
-.a1{background:var(--a);top:-25vw;left:-15vw}.a2{background:var(--c);bottom:-25vw;right:-15vw}
+.a1{background:var(--a);top:-25vw;left:-15vw}.a2{background:#7f1d1d;bottom:-25vw;right:-15vw}
 .wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:36px 20px 60px}
 .back{color:var(--mut);text-decoration:none;font-size:14px}.back:hover{color:#fff}
 .eyebrow{font-family:'JetBrains Mono',monospace;color:var(--a);font-size:13px;margin:22px 0 6px}
 h1{font-size:clamp(34px,6vw,60px);letter-spacing:-.03em;line-height:1.05;font-weight:800}
 .grad{background:linear-gradient(100deg,var(--a),var(--b) 50%,var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
 .lead{color:var(--mut);max-width:680px;margin:14px 0 26px}
-.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(13,18,32,.7);backdrop-filter:blur(10px)}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(21,9,13,.7);backdrop-filter:blur(10px)}
 .filters label{font-size:12px;color:var(--mut);display:flex;gap:6px;align-items:center}
-select,input[type=search]{background:#0a0f1c;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit;font-size:13px;max-width:190px}
+select,input[type=search]{background:#1a0d12;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit;font-size:13px;max-width:190px}
 input[type=search]{min-width:190px}
 select:focus,input:focus{outline:2px solid rgba(52,211,153,.45)}
 .seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
@@ -34,7 +34,7 @@ svg{display:block;width:100%;height:auto}
 .hb:hover span{color:#fff}.hb.sel span{color:var(--a)}
 .hb b{font-family:'JetBrains Mono',monospace;font-size:12px;text-align:right;font-weight:500}
 .legend{font-size:12px;color:var(--mut);margin-top:8px;display:flex;gap:8px;align-items:center}
-.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-left:8px}.legend .m{background:var(--b);margin-left:0}.legend .t{background:var(--c)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-left:8px}.legend .m{background:#ff3b4a;margin-left:0}.legend .t{background:#ffb4a8}
 .tbl{margin-top:0}.scroll{overflow-x:auto;max-height:520px;overflow-y:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{position:sticky;top:0;background:var(--card);text-align:left;color:var(--mut);font-weight:500;font-size:12px;padding:8px 10px;border-bottom:1px solid var(--line)}
@@ -42,7 +42,7 @@ td{padding:8px 10px;border-bottom:1px solid var(--line);color:#c8d0e6;vertical-a
 td:first-child{color:#fff;font-weight:500}
 #more{margin-top:14px}
 .bar{transition:height .5s,y .5s}
-.tip{position:fixed;pointer-events:none;background:#0a0f1c;border:1px solid var(--line);padding:6px 10px;border-radius:8px;font-size:12px;z-index:9;display:none}
+.tip{position:fixed;pointer-events:none;background:#1a0d12;border:1px solid var(--line);padding:6px 10px;border-radius:8px;font-size:12px;z-index:9;display:none}
 footer{margin-top:26px;color:var(--mut);font-size:13px}footer a{color:var(--a)}code{font-family:'JetBrains Mono',monospace;font-size:12px}
 @media(max-width:800px){.kpis{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.card.wide{grid-column:auto}.hb{grid-template-columns:110px 1fr 42px}select,input[type=search]{max-width:none;flex:1 1 140px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}

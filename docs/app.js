@@ -39,11 +39,11 @@
     const max = Math.max(1, ...labels.map((_, i) => series.reduce((s, a) => s + a[i], 0)));
     const bw = (w - 40) / labels.length, tip = $('#tip');
     let out = `<svg viewBox="0 0 ${w} ${h + 24}" role="img">`;
-    [0, .5, 1].forEach(f => { const y = 10 + (h - 10) * (1 - f); out += `<line x1="34" x2="${w}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,.07)"/><text x="30" y="${y + 4}" text-anchor="end" fill="#8f99b3" font-size="10">${fmt(Math.round(max * f))}</text>`; });
+    [0, .5, 1].forEach(f => { const y = 10 + (h - 10) * (1 - f); out += `<line x1="34" x2="${w}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,.07)"/><text x="30" y="${y + 4}" text-anchor="end" fill="#a8959a" font-size="10">${fmt(Math.round(max * f))}</text>`; });
     labels.forEach((l, i) => {
       let y = h; const x = 40 + i * bw;
       series.forEach((a, si) => { const bh = (h - 10) * a[i] / max; y -= bh; out += `<rect class="bar" x="${x + bw * .12}" y="${y}" width="${bw * .76}" height="${bh}" rx="2" fill="${colors[si]}" data-t="${l}: ${fmt(a[i])}"/>`; });
-      if (labels.length <= 14 || i % 2 === 0) out += `<text x="${x + bw / 2}" y="${h + 16}" text-anchor="middle" fill="#8f99b3" font-size="10">${l}</text>`;
+      if (labels.length <= 14 || i % 2 === 0) out += `<text x="${x + bw / 2}" y="${h + 16}" text-anchor="middle" fill="#a8959a" font-size="10">${l}</text>`;
     });
     el.innerHTML = out + '</svg>';
     el.querySelectorAll('rect').forEach(r => { r.onmousemove = e => { tip.style.display = 'block'; tip.textContent = r.dataset.t; tip.style.left = e.clientX + 12 + 'px'; tip.style.top = e.clientY + 12 + 'px'; }; r.onmouseleave = () => tip.style.display = 'none'; });
@@ -62,7 +62,7 @@
 
     const yl = years.filter(y => y >= state.from && y <= state.to);
     const per = t => yl.map(y => d.filter(r => r[ADDED] === y && r[TYPE] === t).length);
-    columns($('#c-year'), yl.map(String), [per(0), per(1)], ['#38bdf8', '#a78bfa']);
+    columns($('#c-year'), yl.map(String), [per(0), per(1)], ['#ff3b4a', '#ffb4a8']);
     hbars($('#c-genre'), [...count(d.flatMap(r => r[GENRES]))].sort((a, b) => b[1] - a[1]).slice(0, 10), 'genre');
     hbars($('#c-country'), [...count(d.flatMap(r => r[COUNTRIES]))].sort((a, b) => b[1] - a[1]).slice(0, 10), 'country');
     hbars($('#c-rating'), [...count(d.map(r => r[RATING]).filter(Boolean))].sort((a, b) => b[1] - a[1]).slice(0, 8), null);
@@ -71,12 +71,12 @@
       $('#t-dur').textContent = 'TV show seasons';
       const s = [...count(shows.map(r => r[DUR]).filter(v => v !== null))].sort((a, b) => a[0] - b[0]);
       const labels = s.map(x => String(x[0]));
-      columns($('#c-dur'), labels, [s.map(x => x[1])], ['#a78bfa'], 480, 180);
+      columns($('#c-dur'), labels, [s.map(x => x[1])], ['#ffb4a8'], 480, 180);
     } else {
       $('#t-dur').textContent = 'Movie length (minutes)';
       const bins = [...Array(12).keys()].map(i => 30 + i * 15);
       const cnt = bins.map((b, i) => mins.filter(m => (i === 0 ? m < b + 15 : m >= b && m < b + 15) || (i === bins.length - 1 && m >= b + 15)).length);
-      columns($('#c-dur'), bins.map((b, i) => i === bins.length - 1 ? b + '+' : String(b)), [cnt], ['#34d399'], 480, 180);
+      columns($('#c-dur'), bins.map((b, i) => i === bins.length - 1 ? b + '+' : String(b)), [cnt], ['#ff3b4a'], 480, 180);
     }
 
     const sorted = [...d].sort((a, b) => b[REL] - a[REL] || a[T].localeCompare(b[T]));
