@@ -1,0 +1,149 @@
+{
+ "cleaning_report": {
+  "rows": 8807,
+  "duplicate_show_ids": 0,
+  "rating_duration_shifted": 3,
+  "missing_date_added": 10,
+  "missing_duration": 0,
+  "missing_director": 2634,
+  "missing_country": 831,
+  "missing_rating": 7
+ },
+ "titles": 8807,
+ "movies": 6131,
+ "tv_shows": 2676,
+ "top_genres": {
+  "International Movies": 2752,
+  "Dramas": 2427,
+  "Comedies": 1674,
+  "International TV Shows": 1351,
+  "Documentaries": 869,
+  "Action & Adventure": 859,
+  "TV Dramas": 763,
+  "Independent Movies": 756,
+  "Children & Family Movies": 641,
+  "Romantic Movies": 616
+ },
+ "top_countries": {
+  "United States": 3690,
+  "India": 1046,
+  "United Kingdom": 806,
+  "Canada": 445,
+  "France": 393,
+  "Japan": 318,
+  "Spain": 232,
+  "South Korea": 231,
+  "Germany": 226,
+  "Mexico": 169
+ },
+ "top_directors": {
+  "Rajiv Chilaka": 22,
+  "Jan Suter": 21,
+  "Ra\u00fal Campos": 19,
+  "Marcus Raboy": 16,
+  "Suhas Kadav": 16,
+  "Jay Karas": 15,
+  "Cathy Garcia-Molina": 13,
+  "Martin Scorsese": 12,
+  "Youssef Chahine": 12,
+  "Jay Chapman": 12
+ },
+ "movie_duration": {
+  "count": 6131,
+  "median": 98.0,
+  "mean": 99.6,
+  "min": 3,
+  "max": 312
+ },
+ "tv_seasons": {
+  "1": 1793,
+  "2": 425,
+  "3": 199,
+  "4": 95,
+  "5": 65,
+  "6": 33,
+  "7": 23,
+  "8": 17,
+  "9": 9,
+  "10": 7,
+  "11": 2,
+  "12": 2,
+  "13": 3,
+  "15": 2,
+  "17": 1
+ },
+ "added_per_year": {
+  "2008": {
+   "Movie": 1,
+   "TV Show": 1
+  },
+  "2009": {
+   "Movie": 2,
+   "TV Show": 0
+  },
+  "2010": {
+   "Movie": 1,
+   "TV Show": 0
+  },
+  "2011": {
+   "Movie": 13,
+   "TV Show": 0
+  },
+  "2012": {
+   "Movie": 3,
+   "TV Show": 0
+  },
+  "2013": {
+   "Movie": 6,
+   "TV Show": 5
+  },
+  "2014": {
+   "Movie": 19,
+   "TV Show": 5
+  },
+  "2015": {
+   "Movie": 56,
+   "TV Show": 26
+  },
+  "2016": {
+   "Movie": 253,
+   "TV Show": 176
+  },
+  "2017": {
+   "Movie": 839,
+   "TV Show": 349
+  },
+  "2018": {
+   "Movie": 1237,
+   "TV Show": 412
+  },
+  "2019": {
+   "Movie": 1424,
+   "TV Show": 592
+  },
+  "2020": {
+   "Movie": 1284,
+   "TV Show": 595
+  },
+  "2021": {
+   "Movie": 993,
+   "TV Show": 505
+  }
+ },
+ "ratings": {
+  "TV-MA": 3207,
+  "TV-14": 2160,
+  "TV-PG": 863,
+  "R": 799,
+  "PG-13": 490,
+  "TV-Y7": 334,
+  "TV-Y": 307,
+  "PG": 287,
+  "TV-G": 220,
+  "NR": 80,
+  "G": 41,
+  "TV-Y7-FV": 6,
+  "NC-17": 3,
+  "UR": 3
+ }
+}
